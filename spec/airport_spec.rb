@@ -57,7 +57,7 @@ describe Airport do
       allow(weather).to receive(:sunny?).and_return(true)
     end
 
-    context "Can #land plane  in airport" do
+    context "Can #land plane in airport" do
 
       before do
         allow(airport).to receive(:full?).and_return(false)
@@ -66,7 +66,7 @@ describe Airport do
 
       it {is_expected.to respond_to(:land).with(1).argument}
 
-      it "Can #land plane  in airport and then see it in the holding_bay" do
+      it "Can #land plane in airport and then see it in the holding_bay" do
         expect(subject.holding_bay).to eq [plane]
       end
 
@@ -138,16 +138,19 @@ describe Airport do
 
     context "Behaviour due to bad/not sunny weather" do
 
-      before do
-        allow(plane).to receive(:flying?).and_return(false)
-        allow(plane).to receive(:change_status)
-        allow(weather).to receive(:sunny?).and_return(false)
-      end
+      it {is_expected.to respond_to(:weather)}
+
 
         context "#landing whilst not sunny" do
 
+          before do
+            allow(plane).to receive(:flying?).and_return(false)
+            allow(plane).to receive(:change_status)
+          end
+
           it "Will not allow plane to land if not sunny" do
-            expect(subject.land plane ).to eq("Unsafe to land plane whilst stormy")
+            allow(weather).to receive(:sunny?).and_return(false)
+            expect(subject.land plane).to eq("Unsafe to land plane whilst stormy")
           end
 
           it "Will not add another plane to the holding bay if landing whilst not sunny" do

@@ -7,10 +7,10 @@ attr_reader :holding_bay, :capacity, :weather
 
 DEFAULT_CAPACITY = 20
 
-  def initialize(capacity=DEFAULT_CAPACITY)
+  def initialize(capacity=DEFAULT_CAPACITY, weather=Weather.new)
     @holding_bay = []
     @capacity = capacity
-    @weather = Weather.new
+    @weather = weather
   end
 
   def land(plane)
